@@ -9,7 +9,7 @@ import numpy as np
 
 
 class DQNAgent:
-    def __init__(self, env, params) -> None:
+    def __init__(self, env, params, solved_rw) -> None:
         self.env = env
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.device = device
@@ -24,6 +24,9 @@ class DQNAgent:
         self.epsilon = params.epsilon
         self.epsilon_min = params.epsilon_min
         self.epsilon_dec = params.epsilon_dec
+        # Solved mean reward for the environment
+        self.solved_mean_rw = solved_rw
+        self.max_num_steps = params.max_num_steps
 
         policy_net = DQN(n_observations, n_actions).to(device)
         target_net = DQN(n_observations, n_actions).to(device)
@@ -97,20 +100,20 @@ class DQNAgent:
         for i_episode in range(self.episodes):
             if len(rewards) > 100:
                 mean_reward = np.mean(rewards[-100:])
-                if mean_reward > 210:
+                if mean_reward > self.solved_mean_rw:
                     print("Solved!")
                     break
             else:
                 mean_reward = np.mean(rewards)
             print(f"Episode {i_episode} - mean reward: {mean_reward}")
-            state, info = self.env.reset()
+            state, _ = self.env.reset()
             done = False
             steps = 0
             reward_sum = 0
             state = torch.tensor(
                 state, dtype=torch.float32, device=self.device
             ).unsqueeze(0)
-            while not done and (steps < 1_500):
+            while not done and (steps < self.max_num_steps):
                 steps += 1
                 action = self.select_action(state)
                 observation, reward, terminated, truncated, _ = self.env.step(
@@ -144,8 +147,10 @@ class DQNAgent:
                 if done:
                     rewards.append(reward_sum)
                     break
-        torch.save(self.policy_net, "models/dqn.pt")
         return rewards
 
     def __repr__(self) -> str:
         return "dqn"
+    
+    def save_model(self, path):
+        torch.save(self.policy_net, path)

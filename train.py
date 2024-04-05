@@ -2,15 +2,20 @@ import os
 import numpy as np
 import pandas as pd
 import gymnasium as gym
-from collections import deque
 from cli_interface import parse_args
-from algorithms import DeepQLearning, DQNAgent, DoubleDeepQNetworks
+from algorithms import DQNAgent, DoubleDeepQNetworks
 from hyperparameters import Hyperparameters
+import flappy_bird_gymnasium
 
 args = parse_args()
 
 env_name = args.env_name
-env = gym.make(env_name)
+
+if env_name == "FlappyBird-v0":
+    env = gym.make(env_name, use_lidar=False)
+else:
+    env = gym.make(env_name)
+
 np.random.seed(args.seed)
 
 params = Hyperparameters(
@@ -22,31 +27,45 @@ params = Hyperparameters(
     episodes=600,
     batch_size=128,
     memory_size=50_000,
+    max_num_steps=1500,
 )
+mean_rw = env.spec.reward_threshold
+if env_name == "FlappyBird-v0":
+    params.max_num_steps = np.inf
+    params.epsilon_dec = 5_000
+    mean_rw = 500
+    params.episodes = 10_000
 
-if args.model == "dql":
-    memory = deque(maxlen=params.memory_size)
-    model = DeepQLearning(env, params, memory)
-elif args.model == "dqn":
+print(f"Threshold reward for {env_name} is {mean_rw}")
+
+if args.model == "dqn":
     params.target_update_rate = 0.005
-    model = DQNAgent(env, params)
+    model = DQNAgent(env, params, mean_rw)
 elif args.model == "ddqn":
     params.target_update_rate = 0.005
-    model = DoubleDeepQNetworks(env, params)
+    model = DoubleDeepQNetworks(env, params, mean_rw)
 
 WINDOW_SIZE = 50
-
 device = model.device
 print(f"Training model {model} {args.train_times} times using {device}")
 
 result_df = pd.DataFrame()
-for _ in range(args.train_times):
+res_folder = f"models/{env_name}/"
+os.makedirs(res_folder, exist_ok=True)
+for i in range(args.train_times):
+    print(f"Train {i}")
     rewards = model.train()
+    model.save_model(f"{res_folder}{args.model}_{i}.pt")
     curr_df = pd.DataFrame(
         {"episode": range(len(rewards)), "reward": rewards, "model": str(model)}
     )
     curr_df["reward_mean"] = curr_df["reward"].rolling(window=WINDOW_SIZE).mean()
     result_df = pd.concat([result_df, curr_df], ignore_index=True)
+
+    if args.model == "dqn":
+        model = DQNAgent(env, params, mean_rw)
+    else:
+        model = DoubleDeepQNetworks(env, params, mean_rw)
 
 path = os.path.join("results", f"{env_name}_{args.model}.csv")
 result_df.to_csv(path, index=False)

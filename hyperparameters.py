@@ -11,5 +11,6 @@ class Hyperparameters:
     episodes: int = 200
     batch_size: int = 64
     memory_size: int = 10000
+    max_num_steps: int = 1500
     # This is used in the DQN model only.
     target_update_rate: float = 0.005
