@@ -12,7 +12,7 @@ args = parse_args()
 env_name = args.env_name
 
 if env_name == "FlappyBird-v0":
-    env = gym.make(env_name, use_lidar=False)
+    env = gym.make(env_name, pipe_gap=150, use_lidar=False, normalize_obs=False, score_limit=500)
 else:
     env = gym.make(env_name)
 
@@ -29,12 +29,16 @@ params = Hyperparameters(
     memory_size=50_000,
     max_num_steps=1500,
 )
+# Use the reward threshold from the environment to determine mean reward convergence
 mean_rw = env.spec.reward_threshold
+is_flappy_bird = False
 if env_name == "FlappyBird-v0":
+    is_flappy_bird = True
     params.max_num_steps = np.inf
     params.epsilon_dec = 5_000
     mean_rw = 500
     params.episodes = 10_000
+    params.epsilon_min = 0.01
 
 print(f"Threshold reward for {env_name} is {mean_rw}")
 

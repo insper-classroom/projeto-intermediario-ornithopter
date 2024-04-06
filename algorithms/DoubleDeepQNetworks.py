@@ -1,5 +1,5 @@
 import torch
-from .network import DQN
+from .network import *
 import torch.optim as optim
 import torch.nn as nn
 from .replay_memory import ReplayMemory, Transition
@@ -79,7 +79,6 @@ class DoubleDeepQNetworks:
         with torch.no_grad():
             best_policy_actions = self.policy_net(non_final_next_states).max(1).indices
             target_values = self.target_net(non_final_next_states)
-            # TODO: VER SE ISSO FAZ SENTIDO
             next_state_values[non_final_mask] = target_values.gather(
                 1, best_policy_actions.unsqueeze(1)
             ).squeeze(1)
