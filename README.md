@@ -40,15 +40,13 @@ Our goal is to develop and evaluate the DQN and Double DQN algorithms on all env
 ## Algorithms
 In this project, we have implemented both DQN and Double DQN algorithms.
 
-In this project, we have implemented both DQN and Double DQN algorithms. 
-
 ### DQN (Deep Q-Networks)
 
-DQN, or Deep Q-Networks, is a reinforcement learning algorithm that utilizes a neural network to approximate the Q-function. It selects actions based on the maximum Q-value predicted by the network. However, this approach can lead to overestimation of action values, affecting the learning process and resulting policies.
+DQN, or Deep Q-Networks, is a reinforcement learning algorithm that utilizes two neural networks: one for action selection (policy network) and another for action evaluation (target network). However, during action selection, the same network is used to evaluate the Q-values for the next state, which can lead to overestimation of action values.
 
 ### Double DQN
 
-Double DQN addresses the overestimation issue by employing two separate neural networks: one for action selection (policy network) and another for action evaluation (target network). By decoupling action selection from evaluation, Double DQN provides more stable and less biased estimates of action values, potentially leading to better-performing policies.
+Double DQN also employs two separate neural networks: one for action selection (policy network) and another for action evaluation (target network). However, it addresses the overestimation issue by decoupling action selection from evaluation. During action evaluation, the target network provides more stable and less biased estimates of action values compared to the policy network, potentially leading to better-performing policies.
 
 ## Comparison: DQN vs Double DQN
 
@@ -113,13 +111,13 @@ Animations of the two algorithms interacting with the environments.
   <img src="results/gifs/FlappyBird-v0_ddqn.gif" alt="FlappyBird-v0 DDQN">
 </p>
 
-**TODO: Conclusao sobre comportamentos.**
-
 ### Conclusion
 
 It is clear that in both algorithms, the agents were able to learn and specialize in their tasks. However, the Deep Q-Network (DQN) outperformed Deep Q-Learning (DQL) since, in the comparison of the Reward vs. Episode curves, the DQN converged in far fewer episodes, sometimes even in half the number of episodes required by DQL, and also achieved a higher average reward than DQL.
 
 The reason the Deep Q-Network (DQN) might perform better than basic Deep Q-Learning could be due to a single main improvements in DQN. DQN uses what's called a target network, which is a separate network that helps in making the learning process more stable. This feature helps DQN learn faster and achieve better results compared to traditional Deep Q-Learning.
+
+The behavior of agents also varies depending on the algorithm employed. DQN tends to exhibit more erratic behavior, characterized by twitchy movements that can be unsettling at times, giving the impression that the agent is on the verge of failure but manages to recover just in time. In contrast, DDQN agents tend to behave more cautiously, executing finer movements and adopting a more confident approach.
 
 ## References
 
