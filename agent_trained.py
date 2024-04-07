@@ -8,8 +8,7 @@ import os
 
 args = parse_args_trained()
 env_name = args.env_name
-model_name = args.model
-print(f"Using model {model_name} for environment {env_name}")
+print(f"Using model for environment {env_name} with a max of {args.steps} steps")
 
 # Print data folder
 print("All checkpoints in models folder:")
@@ -53,7 +52,7 @@ RENDER_FPS = 50
 model_name = model_name.removesuffix(".pt")
 model_name = model_name.split("_")[0]
 with PygameRecord(
-    f"results/{env_name}_{model_name}.gif", RENDER_FPS
+    f"results/gifs/{env_name}_{model_name}.gif", RENDER_FPS
 ) as recorder:
     while (not done) and (not truncated) and (steps < args.steps):
         state = torch.tensor(state, dtype=torch.float32).to(device)
@@ -67,4 +66,3 @@ with PygameRecord(
     env.close()
 
 print(f"Score = {rewards}")
-input("press a key...")

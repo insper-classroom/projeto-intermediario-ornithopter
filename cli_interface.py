@@ -25,11 +25,5 @@ def parse_args_trained():
     parser.add_argument(
         "--env-name", type=str, default=SUPPORTED_ENVS[0], choices=SUPPORTED_ENVS
     )
-    parser.add_argument(
-        "--model",
-        type=str,
-        default=SUPPORTED_MODELS[-1],
-        choices=SUPPORTED_MODELS,
-    )
     parser.add_argument("--steps", type=int, default=2000)
     return parser.parse_args()
