@@ -12,7 +12,7 @@ args = parse_args()
 env_name = args.env_name
 
 if env_name == "FlappyBird-v0":
-    env = gym.make(env_name, pipe_gap=150, use_lidar=False, normalize_obs=False, score_limit=500)
+    env = gym.make(env_name, pipe_gap=150, use_lidar=False, normalize_obs=True, score_limit=500)
 else:
     env = gym.make(env_name)
 
@@ -36,9 +36,9 @@ if env_name == "FlappyBird-v0":
     is_flappy_bird = True
     params.max_num_steps = np.inf
     params.epsilon_dec = 5_000
-    mean_rw = 500
-    params.episodes = 10_000
-    params.epsilon_min = 0.01
+    mean_rw = 120
+    params.episodes = 3_000
+    params.epsilon_min = 0.00
 
 print(f"Threshold reward for {env_name} is {mean_rw}")
 
