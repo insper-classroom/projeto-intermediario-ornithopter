@@ -1,3 +1,7 @@
 torch
-gymnasium[box2d]
+wheel
 matplotlib
+argparse
+seaborn
+pandas
+gymnasium

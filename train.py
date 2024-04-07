@@ -37,7 +37,7 @@ if env_name == "FlappyBird-v0":
     params.max_num_steps = np.inf
     params.epsilon_dec = 5_000
     mean_rw = 500
-    params.episodes = 10_000
+    params.episodes = 2_500
     params.epsilon_min = 0.01
 
 print(f"Threshold reward for {env_name} is {mean_rw}")
