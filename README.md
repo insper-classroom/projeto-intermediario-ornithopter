@@ -57,11 +57,11 @@ By comparing these two algorithms, we not only gauged the impact of advanced tec
 ### Learning Curves
 
 
-![Learning Curve Lunar Lander Environment](results/results.jpg)
+![Learning Curve Lunar Lander Environment](results/graphs/LunarLander_comparison.png)
 
-![Learning Curve Cart Pole Environment](results/results.jpg)
+![Learning Curve Cart Pole Environment](results/graphs/CartPole_comparison.png)
 
-![Learning Curve Flappy Bird Environment](results/results.jpg)
+![Learning Curve Flappy Bird Environment](results/graphs/FlappyBird_comparison.png)
 
 The learning curve above demonstrates the agent's performance over time, measured in terms of average reward per episode. Initially, the agent struggles to achieve successful landings, often incurring penalties for crashes or excessive fuel consumption. Over time, as the agent learns from its experiences, we observe a positive trend in performance, with increased rewards indicating more successful and efficient landings.
 
