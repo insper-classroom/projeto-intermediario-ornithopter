@@ -65,6 +65,8 @@ for i in range(args.train_times):
     )
     curr_df["reward_mean"] = curr_df["reward"].rolling(window=WINDOW_SIZE).mean()
     result_df = pd.concat([result_df, curr_df], ignore_index=True)
+    path = os.path.join("results", f"{env_name}_{args.model}_{i}.csv")
+    result_df.to_csv(path, index=False)
 
     if args.model == "dqn":
         model = DQNAgent(env, params, mean_rw)
