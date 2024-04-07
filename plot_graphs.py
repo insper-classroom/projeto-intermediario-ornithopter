@@ -41,6 +41,6 @@ for prefix, files_group in names.items():
         dfs.append(df_temp)
 
     df_combined = pd.concat(dfs, ignore_index=True)
-    graph_title = f'Performance Comparison: {prefix}'
+    graph_title = f'Learning curve for {prefix} (α=1e-4, γ=0.99, ε=0.9, τ=0.005)'
     out_file_name = f'{prefix}_comparison.png'
     plot_graphs(df_combined, graph_title, out_file_name)
