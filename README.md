@@ -67,37 +67,53 @@ The learning curve above demonstrates the agent's performance over time, measure
 
 ### Agent Demonstrations
 
-Here are two animations showing the agent trained using Deep Q-Learning algorithm in action:
+Animations of the two algorithms interacting with the environments.
 
-- Initial Stages of Learning:
+#### Lunar lander
+
+- DQN
 
 <div align="center">
   <p align="center">
-  <img src="results/lander_trained_dql_half.pt.gif" alt="Initial Stages of Deep Q-Learning">
+  <img src="results/gifs/LunarLander-v2_dqn.gif" alt="LunarLander DQN">
 </p>
 </div>
 
-- After Training Completion:
+- DDQN
 
 <p align="center">
-  <img src="results/lander_trained_dql.pt.gif" alt="Trained Deep Q-Learning Agent">
+  <img src="results/gifs/LunarLander-v2_ddqn.gif" alt="LunarLander DDQN">
 </p>
 
-Here are two animations showing the agent trained using DQN algorithm in action:
+#### CartPole
 
-- Initial Stages of Learning:
+- DQN
   
 <p align="center">
-  <img src="results/lander_trained_dqn_half.pt.gif" alt="Initial Stages of Deep Q-Networks">
+  <img src="results/gifs/CartPole-v0_dqn.gif" alt="CartPole DQN">
 </p>
 
-- After Training Completion:
+- DDQN
 
-  <p align="center">
-  <img src="results/lander_trained_dqn.pt.gif" alt="Trained Deep Q-Networks Agent">
+<p align="center">
+  <img src="results/gifs/CartPole-v0_ddqn.gif" alt="CartPole DDQN">
 </p>
 
-These GIFs illustrate the progression from an inexperienced agent to a skilled one, capable of handling the complexities of lunar landing.
+#### FlappyBird
+
+- DQN
+  
+<p align="center">
+  <img src="results/gifs/FlappyBird-v0_dqn.gif" alt="FlappyBird-v0 DQN">
+</p>
+
+- DDQN
+
+<p align="center">
+  <img src="results/gifs/FlappyBird-v0_ddqn.gif" alt="FlappyBird-v0 DDQN">
+</p>
+
+**TODO: Conclusao sobre comportamentos.**
 
 ### Conclusion
 
