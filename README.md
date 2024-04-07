@@ -38,16 +38,17 @@ In this project, we engage with the following environments:
 Our goal is to develop and evaluate the DQN and Double DQN algorithms on all environments listed above. Through iterative design and testing, our team seeks to optimize agents performance and compare learning efficiency.
 
 ## Algorithms
+In this project, we have implemented both DQN and Double DQN algorithms.
 
 In this project, we have implemented both DQN and Double DQN algorithms. 
 
 ### DQN (Deep Q-Networks)
 
-Something goes here.
+DQN, or Deep Q-Networks, is a reinforcement learning algorithm that utilizes a neural network to approximate the Q-function. It selects actions based on the maximum Q-value predicted by the network. However, this approach can lead to overestimation of action values, affecting the learning process and resulting policies.
 
 ### Double DQN
 
-Something else goes here.
+Double DQN addresses the overestimation issue by employing two separate neural networks: one for action selection (policy network) and another for action evaluation (target network). By decoupling action selection from evaluation, Double DQN provides more stable and less biased estimates of action values, potentially leading to better-performing policies.
 
 ## Comparison: DQN vs Double DQN
 
