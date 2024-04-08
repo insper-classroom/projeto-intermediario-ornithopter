@@ -50,7 +50,9 @@ Double DQN also employs two separate neural networks: one for action selection (
 
 ## Comparison: DQN vs Double DQN
 
-By comparing these two algorithms, we not only gauged the impact of advanced techniques like experience replay on the learning efficiency and stability but also demonstrated the evolution of reinforcement learning strategies from basic Q-Learning to sophisticated architectures like DQN. The implementation of both algorithms provided valuable insights into the dynamics of reinforcement learning and its application in complex environments such as lunar landing, cartPole and FlappyBird.
+Reinforcement learning algorithms have seen significant advancements in recent years, with Deep Q-Networks (DQN) and its variant, Double DQN, emerging as prominent contenders. DQN, pioneered by Mnih et al. (2015), revolutionized the field by leveraging deep neural networks to approximate Q-values, enabling successful learning in complex environments. Double DQN, proposed by van Hasselt et al. (2016), aimed to address overestimation biases inherent in DQN by decoupling action selection and evaluation. In this study, we investigate and compare the performance of DQN and Double DQN across three diverse environments: CartPole, LunarLander, and FlappyBird. By examining their efficacy in these environments, we aim to gain insights into the strengths and weaknesses of each algorithm in different scenarios.
+
+The algorithms were trained five times each in all of the environments using a simple Fully-Connected neural network with three layers. For all trainings, an early stop policy was implemented to reduce training time. This policy dictates that training stops when the mean of the rewards from the **last 100 episodes** reaches a threshold considered sufficient for solving the environment. The threshold for stopping training is determined by the `env.spec.reward_threshold` variable provided by the Farama Gymnasium environments. In the case of the Flappy Bird environment, this variable was not defined. Due to time constraints (with training reaching over 12 hours), we set this threshold to 120, indicating satisfactory performance by the agent in playing the game.
 
 ### Learning Curves
 
@@ -61,16 +63,13 @@ By comparing these two algorithms, we not only gauged the impact of advanced tec
 
 ![Learning Curve Flappy Bird Environment](results/graphs/FlappyBird_comparison.png)
 
-The learning curve above demonstrates the agent's performance over time, measured in terms of average reward per episode. Initially, the agent struggles to achieve successful landings, often incurring penalties for crashes or excessive fuel consumption. Over time, as the agent learns from its experiences, we observe a positive trend in performance, with increased rewards indicating more successful and efficient landings.
-
-### NOVO
 The learning curves above effectively demonstrate the behavior of the algorithms.
 
 In the Lunar Lander environment, DQN initially achieves positive rewards sooner and at a faster rate compared to DDQN. However, as episodes progress, DDQN gradually catches up in rewards, resulting in both algorithms achieving similar performance by the end. Notably, DQN tends to converge slightly quicker.
 
 Conversely, in the CartPole environment, DDQN starts acquiring positive rewards earlier than DQN, which consistently lags behind. Although both algorithms encounter a dip in mean rewards after reaching a peak, highlighting the dangers of overconfidence in CartPole, DDQN demonstrates an ability to learn from mistakes and converge much faster than DQN.
 
-In the Flappy Bird environment, training proves highly unstable for both agents as they struggle to attain higher scores...
+In the Flappy Bird environment, training proves to be highly unstable for both agents, due to the randomness of the environment and the neural network's difficulty in generalizing behavior for the game. Because of the early stop mechanism explained before, the training stops at a certain threshold, leading to DQN, similarly to in Lunar Lander, finishing its training before DDQN, yet both managed to achieve the set average reward.
 
 ### Agent Demonstrations
 
@@ -129,5 +128,5 @@ The reason the Deep Q-Network (DQN) might perform better than basic Deep Q-Learn
 The behavior of agents also varies depending on the algorithm employed. DQN tends to exhibit more erratic behavior, characterized by twitchy movements that can be unsettling at times, giving the impression that the agent is on the verge of failure but manages to recover just in time. In contrast, DDQN agents tend to behave more cautiously, executing finer movements and adopting a more confident approach.
 
 ## References
-
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Hw222fiZ)
+- Double Deep Q-Networks - https://ojs.aaai.org/index.php/AAAI/article/view/10295
+- Deep Q-Networks - https://www.nature.com/articles/nature14236
