@@ -119,13 +119,19 @@ Animations of the two algorithms interacting with the environments.
   <img src="results/gifs/FlappyBird-v0_ddqn.gif" alt="FlappyBird-v0 DDQN">
 </p>
 
+The behavior of agents also varies depending on the algorithm employed. DQN tends to exhibit more erratic behavior, characterized by twitchy movements that can be unsettling at times, giving the impression that the agent is on the verge of failure but manages to recover just in time. In contrast, DDQN agents tend to behave more cautiously, executing finer movements and adopting a more confident approach.
+
 ### Conclusion
 
-It is clear that in both algorithms, the agents were able to learn and specialize in their tasks. However, the Deep Q-Network (DQN) outperformed Deep Q-Learning (DQL) since, in the comparison of the Reward vs. Episode curves, the DQN converged in far fewer episodes, sometimes even in half the number of episodes required by DQL, and also achieved a higher average reward than DQL.
+Through rigorous training and evaluation, we observed distinct behaviors of DQN and Double DQN in each environment, demonstrating that, in both algorithms, the agents were able to learn and specialize in their tasks. In the Lunar Lander and Flappy Bird scenarios, DQN exhibited a faster initial learning rate, achieving positive rewards more quickly than Double DQN. However, Double DQN demonstrated its strength in producing more stable and less biased estimates over time, which, in the case of the Lunar Lander environment, allowed it to catch up and match DQN's performance by the end of training.
 
-The reason the Deep Q-Network (DQN) might perform better than basic Deep Q-Learning could be due to a single main improvements in DQN. DQN uses what's called a target network, which is a separate network that helps in making the learning process more stable. This feature helps DQN learn faster and achieve better results compared to traditional Deep Q-Learning.
+Contrastingly, the Cart Pole environment highlighted Double DQN's advantage from the outset, as it began acquiring positive rewards earlier and showed a remarkable ability to recover and learn from dips in performance more effectively than DQN. This indicates Double DQN's potential for better handling the challenges of overestimation and providing a more robust learning trajectory in certain contexts.
 
-The behavior of agents also varies depending on the algorithm employed. DQN tends to exhibit more erratic behavior, characterized by twitchy movements that can be unsettling at times, giving the impression that the agent is on the verge of failure but manages to recover just in time. In contrast, DDQN agents tend to behave more cautiously, executing finer movements and adopting a more confident approach.
+One of the critical insights from our project is the importance of algorithm selection tailored to the specific characteristics and challenges of the environment. While DQN might offer a quicker convergence in some scenarios, Double DQN's approach to reducing overestimation bias can lead to more stable and reliable learning in others. The choice between these algorithms should be informed by their inherent strengths and weaknesses, as well as the nature of the task at hand.
+
+Moreover, the implementation of an early stop policy proved crucial in our training process, highlighting the need for efficient training strategies that balance computational resources with the achievement of satisfactory performance levels.
+
+In conclusion, our project underscores the significance of continuous exploration and refinement in the field of reinforcement learning. The nuanced understanding gained from comparing DQN and Double DQN across varied environments enriches our toolkit for tackling complex problems. As we move forward, the insights and methodologies developed in this project will serve as valuable resources for future research and application in the evolving landscape of artificial intelligence.
 
 ## References
 - Double Deep Q-Networks - https://ojs.aaai.org/index.php/AAAI/article/view/10295
